@@ -62,6 +62,7 @@ while True:
         for node in etcd.get_client_path("/members?recursive=true")["node"]["nodes"]:
             member = node["key"].split('/')[-1]
             if member != postgresql.name:
+                print "created replication slot for %s" % member
                 postgresql.query("DO LANGUAGE plpgsql $$DECLARE somevar VARCHAR; BEGIN SELECT slot_name INTO somevar FROM pg_replication_slots WHERE slot_name = '%(slot)s' LIMIT 1; IF NOT FOUND THEN PERFORM pg_create_physical_replication_slot('%(slot)s'); END IF; END$$;" % {"slot": member})
 
     time.sleep(config["loop_wait"])

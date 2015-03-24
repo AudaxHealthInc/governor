@@ -4,9 +4,9 @@ etcd:
   ttl: 30
   host: 127.0.0.1:4001
 postgresql:
-  name: postgresql2
-  listen: 0.0.0.0:5442
-  data_dir: /var/lib/postgresql/9.4/main2
+  name: postgresql3
+  listen: 0.0.0.0:5452
+  data_dir: /var/lib/postgresql/9.4/main3
   replication:
     username: replicator
     password: ops

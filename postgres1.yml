@@ -1,4 +1,4 @@
-loop_wait: 10
+loop_wait: 5
 etcd:
   scope: gov
   ttl: 30
