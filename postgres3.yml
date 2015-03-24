@@ -11,8 +11,8 @@ postgresql:
     username: replicator
     password: ops
     network:  0.0.0.0/0
-  #recovery_conf:
-    #restore_command: cp ../wal_archive/%f %p
+  recovery_conf:
+    restore_command: cp ../wal_archive/%f %p
   parameters:
     archive_mode: "on"
     wal_level: hot_standby
