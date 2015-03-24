@@ -2,15 +2,15 @@ loop_wait: 10
 etcd:
   scope: gov
   ttl: 30
-  host: 33.33.33.12:4001
+  host: 127.0.0.1:4001
 postgresql:
   name: postgresql2
-  listen: 33.33.33.12:5432
-  data_dir: /var/lib/postgresql/9.4/main
+  listen: 127.0.0.1:5442
+  data_dir: /var/lib/postgresql/9.4/main2
   replication:
     username: replicator
     password: ops
-    network:  33.33.33.11/32
+    network:  127.0.0.1/32
   #recovery_conf:
     #restore_command: cp ../wal_archive/%f %p
   parameters:
