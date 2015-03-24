@@ -35,7 +35,7 @@ class Etcd:
         opener.open(request)
 
     def client_url(self, path):
-        return "http://%s/v2/keys/service/%s%s" % (self.host, self.scope, path)
+        return "http://%s/v2/keys/%s%s" % (self.host, self.scope, path)
 
     def current_leader(self):
         try:
