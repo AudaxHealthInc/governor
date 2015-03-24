@@ -5,7 +5,7 @@ etcd:
   host: 127.0.0.1:4001
 postgresql:
   name: postgresql3
-  listen: 0.0.0.0:5452
+  listen: 33.33.33.13:5432
   data_dir: /var/lib/postgresql/9.4/main3
   replication:
     username: replicator
