@@ -50,8 +50,8 @@ if postgresql.data_directory_empty():
             else:
                 time.sleep(5)
 else:
-    #postgresql.write_recovery_conf({"address": "postgres://169.0.0.1:5432"})
-    postgresql.write_recovery_conf(etcd.current_leader())
+    #postgresql.write_recovery_conf(etcd.current_leader())
+    postgresql.write_recovery_conf({"address": "postgres://198.51.100.42:5432"})
     postgresql.start()
 
 while True:

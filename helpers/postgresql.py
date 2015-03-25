@@ -139,10 +139,9 @@ class Postgresql:
 
     def write_pg_hba(self):
         f = open("%s/pg_hba.conf" % self.data_dir, "a")
-        f.write("host replication %(username)s %(network)s md5" %
-                {"username": self.replication["username"], "network": self.replication["network"]})
+        f.write("host postgres postgres all trust\n")
+        f.write("host replication %(username)s all md5" % {"username": self.replication["username"]})
         f.close()
-
 
     def write_recovery_conf(self, leader_hash):
         leader = urlparse(leader_hash["address"])

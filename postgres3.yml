@@ -1,12 +1,12 @@
-loop_wait: 5
+loop_wait: 3
 etcd:
   scope: gov
-  ttl: 30
+  ttl: 10
   host: 127.0.0.1:4001
 postgresql:
   name: postgresql3
   listen: 33.33.33.13:5432
-  data_dir: /var/lib/postgresql/9.4/main3
+  data_dir: /var/lib/postgresql/9.4/main
   replication:
     username: replicator
     password: ops
