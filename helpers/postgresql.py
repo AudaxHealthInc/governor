@@ -1,5 +1,6 @@
 import os, psycopg2, re, time
 from urlparse import urlparse
+#from netaddr import *
 
 class Postgresql:
 
@@ -139,7 +140,8 @@ class Postgresql:
 
     def write_pg_hba(self):
         f = open("%s/pg_hba.conf" % self.data_dir, "a")
-        f.write("host postgres postgres all trust\n")
+        #f.write("host postgres postgres all trust\n")
+        f.write("host postgres postgres %(ipaddress)s trust\n" % {"ipaddress": IPNetwork(self.host)})
         f.write("host replication %(username)s all md5" % {"username": self.replication["username"]})
         f.close()
 
