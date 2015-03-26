@@ -81,7 +81,7 @@ class Postgresql:
     def start(self):
         if self.is_running():
             print "Cannot start PostgreSQL because one is already running."
-            return false
+            return False
 
         pid_path = "%s/postmaster.pid" % self.data_dir
         if os.path.exists(pid_path):
@@ -141,7 +141,9 @@ class Postgresql:
     def write_pg_hba(self):
         f = open("%s/pg_hba.conf" % self.data_dir, "a")
         #f.write("host postgres postgres all trust\n")
-        f.write("host postgres postgres %(ipaddress)s trust\n" % {"ipaddress": IPNetwork(self.host)})
+        #f.write("host postgres postgres %(ipaddress)s trust\n" % {"ipaddress": IPNetwork(self.host)})
+        f.write("host postgres postgres samehost trust\n")
+        f.write("host all all 0.0.0.0/0 md5\n")
         f.write("host replication %(username)s all md5" % {"username": self.replication["username"]})
         f.close()
 
