@@ -61,7 +61,7 @@ class Postgresql:
     def sync_from_leader(self, leader):
         leader = urlparse(leader["address"])
 
-        f = open("./pgpass", "w")
+        f = open("%s/pgpass", "w" % os.path.expanduser("~"))
         f.write("%(hostname)s:%(port)s:*:%(username)s:%(password)s\n" %
                 {"hostname": leader.hostname, "port": leader.port, "username": leader.username, "password": leader.password})
         f.close()
@@ -69,8 +69,8 @@ class Postgresql:
         os.system("chmod 600 pgpass")
 
 
-        return os.system("PGPASSFILE=pgpass pg_basebackup -R -D %(data_dir)s --host=%(host)s --port=%(port)s -U %(username)s" %
-                {"data_dir": self.data_dir, "host": leader.hostname, "port": leader.port, "username": leader.username}) == 0
+        return os.system("PGPASSFILE=%(home)s/pgpass pg_basebackup -R -D %(data_dir)s --host=%(host)s --port=%(port)s -U %(username)s" %
+                {"home": os.path.expanduser("~"), "data_dir": self.data_dir, "host": leader.hostname, "port": leader.port, "username": leader.username}) == 0
 
     def is_leader(self):
         return not self.query("SELECT pg_is_in_recovery();").fetchone()[0]
