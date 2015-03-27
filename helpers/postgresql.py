@@ -66,7 +66,7 @@ class Postgresql:
                 {"hostname": leader.hostname, "port": leader.port, "username": leader.username, "password": leader.password})
         f.close()
 
-        os.system("chmod 600 pgpass")
+        os.system("chmod 600 %s/pgpass" % os.path.expanduser("~"))
 
 
         return os.system("PGPASSFILE=%(home)s/pgpass pg_basebackup -R -D %(data_dir)s --host=%(host)s --port=%(port)s -U %(username)s" %
