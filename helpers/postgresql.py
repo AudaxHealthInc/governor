@@ -61,7 +61,7 @@ class Postgresql:
     def sync_from_leader(self, leader):
         leader = urlparse(leader["address"])
 
-        f = open("%s/pgpass", "w" % os.path.expanduser("~"))
+        f = open("%s/pgpass" % os.path.expanduser("~"), "w")
         f.write("%(hostname)s:%(port)s:*:%(username)s:%(password)s\n" %
                 {"hostname": leader.hostname, "port": leader.port, "username": leader.username, "password": leader.password})
         f.close()
