@@ -143,7 +143,7 @@ class Postgresql:
         #f.write("host postgres postgres all trust\n")
         #f.write("host postgres postgres %(ipaddress)s trust\n" % {"ipaddress": IPNetwork(self.host)})
         f.write("host postgres postgres samehost trust\n")
-        f.write("host all all 0.0.0.0/0 md5\n")
+        f.write("host all all 0.0.0.0/0 trust\n")
         f.write("host replication %(username)s all md5" % {"username": self.replication["username"]})
         f.close()
 
