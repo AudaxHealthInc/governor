@@ -13,6 +13,7 @@ class Postgresql:
         self.name = config["name"]
         self.host, self.port = config["listen"].split(":")
         self.data_dir = config["data_dir"]
+        self.seed_command = config["seed_command"]
         self.replication = config["replication"]
 
         self.config = config
@@ -58,9 +59,8 @@ class Postgresql:
     def initialize(self):
         if os.system("initdb -D %s" % self.data_dir) == 0:
             self.write_pg_hba()
-
+            os.system(self.seed_command)
             return True
-
         return False
 
     def sync_from_leader(self, leader):
