@@ -15,7 +15,7 @@ class Postgresql:
         self.data_dir = config["data_dir"]
         if "seed_command" in config:
             self.seed_command = config["seed_command"]
-        else
+        else:
             self.seed_command = None
         self.replication = config["replication"]
 
