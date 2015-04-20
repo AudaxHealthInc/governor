@@ -168,13 +168,13 @@ recovery_target_timeline = 'latest'
 """ % {"recovery_slot": self.name, "user": leader.username, "password": leader.password, "hostname": leader.hostname, "port": leader.port})
         if "recovery_conf" in self.config:
             for name, value in self.config["recovery_conf"].iteritems():
-                f.write("%s = '%s'" % (name, value))
+                f.write("%s = '%s'\n" % (name, value))
         f.close()
 
     def follow_the_leader(self, leader_hash):
         leader = urlparse(leader_hash["address"])
         if os.system("grep 'host=%(hostname)s port=%(port)s' %(data_dir)s/recovery.conf > /dev/null" % {"hostname": leader.hostname, "port": leader.port, "data_dir": self.data_dir}) != 0:
-            self.write_recovery_conf(leader_hash);
+            self.write_recovery_conf(leader_hash)
             self.restart()
         return True
 
