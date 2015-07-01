@@ -82,7 +82,10 @@ class Postgresql:
                 {"home": os.path.expanduser("~"), "data_dir": self.data_dir, "host": leader.hostname, "port": leader.port, "username": leader.username}) == 0
 
     def is_leader(self):
-        return not self.query("SELECT pg_is_in_recovery();").fetchone()[0]
+        try:
+            return not self.query("SELECT pg_is_in_recovery();").fetchone()[0]
+        except psycopg2.OperationalError:
+            return False
 
     def is_running(self):
         return os.system("pg_ctl status -D %s > /dev/null" % self.data_dir) == 0
