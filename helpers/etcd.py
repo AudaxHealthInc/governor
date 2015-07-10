@@ -52,6 +52,8 @@ class Etcd:
                     continue
                 else:
                     raise
+            else:
+                return
 
     def client_url(self, path):
         return "http://%s/v2/keys/%s%s" % (self.host, self.scope, path)
